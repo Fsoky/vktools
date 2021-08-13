@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vktools"
-version = "1.0.1"
+version = "1.0.2"
 description = "https://github.com/Fsoky/vktools"
 readme = "README.md"
 authors = ["Fsoky <cyberuest0x12@gmail.com>"]
