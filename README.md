@@ -1,15 +1,15 @@
 # vktools
 Tools for vk_api for comfort work
 
-![example imports](https://github.com/Fsoky/vktools/images/blob/main/Screenshot_0.png)
+![example imports](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_0.png)
 
-![example keyboard](https://github.com/Fsoky/vktools/images/blob/main/Screenshot_1.png)
+![example keyboard](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_1.png)
 
-![example code of keyboard](https://github.com/Fsoky/vktools/images/blob/main/Screenshot_2.png)
+![example code of keyboard](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_2.png)
 
-![example carousel](https://github.com/Fsoky/vktools/images/blob/main/Screenshot_3.png)
+![example carousel](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_3.png)
 
-![example code of carousel](https://github.com/Fsoky/vktools/images/blob/main/Screenshot_4.png)
+![example code of carousel](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_4.png)
 
 ## Example code
 ```py
