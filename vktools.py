@@ -1,6 +1,15 @@
 import json
 
 
+class VkTools:
+
+	def __init__(self, vk):
+		self.vk = vk
+
+	def get_id(self, screen_name):
+		return self.vk.method("utils.resolveScreenName", {"screen_name": screen_name, "v": 5.21})["object_id"]
+
+
 class Keyboard(object):
 
 	def __init__(self, button: list, one_time=False, inline=False):
