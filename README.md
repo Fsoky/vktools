@@ -12,6 +12,7 @@ Tools for vk_api for comfort work
 ![example code of carousel](https://github.com/Fsoky/vktools/blob/main/images/Screenshot_4.png)
 
 ## Example code
+
 ```py
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
@@ -85,4 +86,16 @@ for event in VkLongPoll(vk).listen():
 			)
 
 			send_message(user_id, "VkTools Carousel by Fsoky ~", carousel=carousel)
+```
+
+## get_id(screen_name) - recieve user id from screen name
+
+```py
+import vk_api
+from vktools import VkTools
+
+vk = vk_api.VkApi(token="token")
+vkt = VkTools(vk)
+
+vk.method("messages.send", {"user_id": vkt.get_id("ansqqq"), "message": "Hello, World!", "random_id": 0})
 ```
