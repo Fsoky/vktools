@@ -2,7 +2,7 @@ import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
-from vktools import Keyboard, ButtonColor, Text, OpenLink, Location
+from vktools import Keyboard, ButtonColor, Text, OpenLink, Location, Carousel, Element
 
 vk = vk_api.VkApi(token="token")
 
@@ -20,7 +20,7 @@ def send_message(user_id, message, keyboard=None, carousel=None):
 		values["template"] = carousel.add_carousel()
 
 	vk.method("messages.send", values)
-	
+
 
 for event in VkLongPoll(vk).listen():
 	if event.type == VkEventType.MESSAGE_NEW and event.to_me:
