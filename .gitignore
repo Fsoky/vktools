@@ -1,0 +1,5 @@
+# Ignore pyproject file
+pyproject.toml
+
+# Ignore dist folder
+/dist

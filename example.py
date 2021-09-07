@@ -2,7 +2,7 @@ import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 
-from vktools import Keyboard, KeyboardButton, Carousel, CarouselButton
+from vktools import Keyboard, ButtonColor, Text, OpenLink, Location
 
 vk = vk_api.VkApi(token="token")
 
@@ -20,6 +20,7 @@ def send_message(user_id, message, keyboard=None, carousel=None):
 		values["template"] = carousel.add_carousel()
 
 	vk.method("messages.send", values)
+	
 
 for event in VkLongPoll(vk).listen():
 	if event.type == VkEventType.MESSAGE_NEW and event.to_me:
@@ -30,41 +31,36 @@ for event in VkLongPoll(vk).listen():
 			keyboard = Keyboard(
 				[
 					[
-						KeyboardButton().text("RED", "negative"),
-						KeyboardButton().text("GREEN", "positive"),
-						KeyboardButton().text("BLUE", "primary"),
-						KeyboardButton().text("WHITE")
+						Text("RED", ButtonColor.NEGATIVE),
+						Text("GREEN", ButtonColor.POSITIVE),
+						Text("BLUE", ButtonColor.PRIMARY),
+						Text("WHITE")
 					],
 					[
-						KeyboardButton().openlink("YouTube", "https://youtube.com/c/Фсоки")
-					],
-					[
-						KeyboardButton().location()
+						OpenLink("YouTube", "https://youtube.com/c/Фсоки"),
+						Location()
 					]
 				]
 			)
 
 			send_message(user_id, "VkTools Keyboard by Fsoky ~", keyboard)
+
 		elif text == "test carousel":
 			carousel = Carousel(
 				[
-					CarouselButton().openlink(
-						[
-							CarouselButton().element(
-								title="Title 1",
-								description="Description 1",
-								photo_id="-203980592_457239030",
-								link="https://vk.com/fsoky",
-								buttons=[KeyboardButton().text("Button 1", "positive")]
-							),
-							CarouselButton().element(
-								title="Title 2",
-								description="Description 2",
-								photo_id="-203980592_457239029",
-								link="https://vk.com/fsoky",
-								buttons=[KeyboardButton().text("Button 2", "negative")]
-							)
-						]
+					Element(
+						"Title 1",
+						"Description 1",
+						"-203980592_457239030", # photo_id
+						"https://vk.com/fsoky", # redirect url, if user click on element
+						[Text("Button 1", ButtonColor.POSITIVE)]
+					),
+					Element(
+						"Title 2",
+						"Description 2",
+						"-203980592_457239030", # photo_id
+						"https://vk.com/fsoky", # redirect url, if user click on element
+						[Text("Button 2", ButtonColor.PRIMARY)]
 					)
 				]
 			)

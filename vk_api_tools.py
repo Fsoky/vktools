@@ -1,7 +1,8 @@
 import json
+from typing import Optional
 
 
-class VkTools:
+class Tools:
 
 	def __init__(self, vk):
 		self.vk = vk
@@ -10,7 +11,7 @@ class VkTools:
 		return self.vk.method("utils.resolveScreenName", {"screen_name": screen_name, "v": 5.21})["object_id"]
 
 
-class Keyboard(object):
+class Keyboard:
 
 	def __init__(self, button: list, one_time=False, inline=False):
 		self.one_time = one_time
@@ -27,9 +28,17 @@ class Keyboard(object):
 		return obj.decode("utf-8")
 
 
-class KeyboardButton(object):
+class ButtonColor:
 
-	def text(self, label, color="secondary", payload=None):
+	NEGATIVE = "negative"
+	POSITIVE = "positive"
+	PRIMARY = "primary"
+	SECONDARY = "secondary"
+
+
+class Text:
+
+	def __new__(cls, label: Optional[str], color: Optional[str]="secondary", payload: Optional[str]=None):
 		return {
 			"action": {
 				"type": "text",
@@ -39,7 +48,10 @@ class KeyboardButton(object):
 			"color": color
 		}
 
-	def openlink(self, label, link, payload=None):
+
+class OpenLink:
+
+	def __new__(cls, label: Optional[str], link: Optional[str], payload: Optional[str]=None):
 		return {
 			"action": {
 				"type": "open_link",
@@ -49,7 +61,10 @@ class KeyboardButton(object):
 			}
 		}
 
-	def location(self, payload=None):
+
+class Location:
+
+	def __new__(cls, payload: Optional[str]=None):
 		return {
 			"action": {
 				"type": "location",
@@ -57,7 +72,10 @@ class KeyboardButton(object):
 			}
 		}
 
-	def vkpay(self, pay_hash, payload=None):
+
+class VkPay:
+
+	def __new__(cls, pay_hash: Optional[str], payload: Optional[str]=None):
 		return {
 			"action": {
 				"type": "vkpay",
@@ -66,7 +84,10 @@ class KeyboardButton(object):
 			}
 		}
 
-	def vkapps(self, app_id, owner_id, label, app_hash, payload=None):
+
+class VkApps:
+
+	def __new__(cls, app_id: Optional[int], owner_id: Optional[int], label: Optional[str], app_hash: Optional[str], payload: Optional[str]=None):
 		return {
 			"action": {
 				"type": "vkapps",
@@ -85,9 +106,43 @@ class Carousel(object):
 		self.carousel = carousel
 
 	def add_carousel(self):
-		obj = json.dumps(self.carousel[0], ensure_ascii=False).encode("utf-8")
+		obj = json.dumps(
+			{
+				"type": "carousel",
+				"elements": self.carousel
+			},
+			ensure_ascii=False
+		).encode("utf-8")
+
 		return obj.decode("utf-8")
 
+
+class Element:
+
+	def __new__(cls, title: Optional[str]=None, description: Optional[str]=None, photo_id: Optional[str]=None, link: Optional[str]=None, buttons: Optional[list]=None, template_type: str="open_link"):
+		if template_type == "open_link":
+			return {
+				"title": title,
+				"description": description,
+				"action": {
+					"type": "open_link",
+					"link": link
+				},
+				"photo_id": photo_id,
+				"buttons": buttons
+			}
+		elif template_type == "open_photo":
+			return {
+				"title": title,
+				"description": description,
+				"photo_id": photo_id,
+				"action": {
+					"type": "open_photo"
+				},
+				"buttons": buttons
+			}
+		else:
+			raise ValueError("Parametr template_type have: open_link or open_photo")
 
 class CarouselButton(object):
 
