@@ -67,8 +67,7 @@ vk.messages.send(user_id=event.user_id, message="Test Keyboard", template=carous
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-
-from vktools import Keyboard, ButtonColor, Text, OpenLink, Location
+from vktools import Keyboard, ButtonColor, Text, OpenLink, Location, Carousel, Element
 
 vk = vk_api.VkApi(token="token")
 
