@@ -2,7 +2,7 @@
 pyproject.toml
 
 # Ignore dist folder
-./dist
+/dist
 
 # Ignore pycache
 __pycache__
