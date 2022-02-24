@@ -40,6 +40,7 @@ keyboard = Keyboard(
     ]
 )
 ```
+![Keyboard](https://github.com/Fsoky/vktools/blob/main/images/keyboard_image.png)
 
 ### Карусель
 ```py
@@ -64,6 +65,7 @@ carousel = Carousel(
     ]
 )
 ```
+![Carousel](https://github.com/Fsoky/vktools/blob/main/images/carousel_image.png)
 
 ### Присоединяйся к нам
 [![Vkontakte](https://img.shields.io/badge/Vkontakte-black?style=for-the-badge&logo=VK)](https://vk.com/fsoky)
