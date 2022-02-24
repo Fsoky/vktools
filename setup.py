@@ -19,5 +19,6 @@ setup(name="vktools",
 	url="https://github.com/Fsoky/vktools",
 	author="Fsoky Community",
 	author_email="cyberuest0x12@gmail.com",
-	keywords="vktools vk vk-api api"
+	keywords="vktools vk vk-api api",
+	packages=find_packages()
 )
