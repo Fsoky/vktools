@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: vktools
-Version: 1.0.5
+Version: 1.0.6
 Summary: Инструменты для модуля vk-api. Клавиатура и карусели.
 Home-page: https://github.com/Fsoky/vktools
 Author: Fsoky Community
@@ -48,6 +48,9 @@ Description: # VkTools - дополнительные инструменты д�
             ]
         )
         ```
+        `.add_keyboard()` - получить JSON клавиатуры
+        
+        ![Keyboard](https://github.com/Fsoky/vktools/blob/main/images/keyboard_image.png)
         
         ### Карусель
         ```py
@@ -72,11 +75,15 @@ Description: # VkTools - дополнительные инструменты д�
             ]
         )
         ```
+        `.add_carousel()` - Получить JSON карусели
+        
+        ![Carousel](https://github.com/Fsoky/vktools/blob/main/images/carousel_image.png)
         
         ### Присоединяйся к нам
         [![Vkontakte](https://img.shields.io/badge/Vkontakte-black?style=for-the-badge&logo=VK)](https://vk.com/fsoky)
         [![YouTube](https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=YouTube)](https://youtube.com/c/Фсоки)
         [![Telegram](https://img.shields.io/badge/Telegram-blue?style=for-the-badge&logo=Telegram)](https://t.me/fsokycommunity)
+        
 Keywords: vktools vk vk-api api
 Platform: UNKNOWN
 Description-Content-Type: text/markdown
