@@ -40,7 +40,7 @@ keyboard = Keyboard(
     ]
 )
 ```
-`.add_keyboard()` - получить JSON клавиатуры
+`.add_keyboard()` - получить JSON клавиатуры \
 `.get_empty_keyboard()` - Удалить клавиатуру
 
 ![Keyboard](https://github.com/Fsoky/vktools/blob/main/images/keyboard_image.png)
