@@ -1,1 +1,2 @@
-from . import keyboard, template
+from .keyboard import *
+from .template import *
