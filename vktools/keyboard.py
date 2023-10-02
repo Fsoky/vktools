@@ -1,39 +1,23 @@
 import json
-from typing import Optional
+from enum import Enum
+from typing import List, Dict, Any, Union, Optional
 
 
-class Keyboard:
-
-    def __init__(self, button: list, one_time=False, inline=False):
-        self.one_time = one_time
-        self.inline = inline
-
-        self.keyboard = {
-            "one_time": self.one_time,
-            "inline": self.inline,
-            "buttons": button
-        }
-
-    def add_keyboard(self):
-        obj = json.dumps(self.keyboard, ensure_ascii=False).encode("utf-8")
-        return obj.decode("utf-8")
-
-    def get_empty_keyboard(self):
-        self.keyboard["buttons"] = []
-        return self.add_keyboard()
-
-
-class ButtonColor:
-
-    NEGATIVE = "negative"
-    POSITIVE = "positive"
-    PRIMARY = "primary"
-    SECONDARY = "secondary"
+class ButtonColor(Enum):
+    NEGATIVE: str = "negative"
+    POSITIVE: str = "positive"
+    PRIMARY: str = "primary"
+    SECONDARY: str = "secondary"
 
 
 class Text:
 
-    def __new__(cls, label: Optional[str], color: Optional[str]="secondary", payload: Optional[str]=None):
+    def __new__(
+        cls,
+        label: str,
+        color: ButtonColor=ButtonColor.SECONDARY,
+        payload: Optional[str] | None=None
+    ) -> Dict[str, Union[str, Dict[str, str], None]]:
         return {
             "action": {
                 "type": "text",
@@ -46,7 +30,12 @@ class Text:
 
 class OpenLink:
 
-    def __new__(cls, label: Optional[str], link: Optional[str], payload: Optional[str]=None):
+    def __new__(
+        cls,
+        label: Optional[str],
+        link: Optional[str],
+        payload: Optional[str] | None=None
+    ) -> Dict[str, Union[str, Dict[str, str], None]]:
         return {
             "action": {
                 "type": "open_link",
@@ -59,7 +48,10 @@ class OpenLink:
 
 class Location:
 
-    def __new__(cls, payload: Optional[str]=None):
+    def __new__(
+        cls,
+        payload: Optional[str] | None=None
+    ) -> Dict[str, Union[str, Dict[str, str], None]]:
         return {
             "action": {
                 "type": "location",
@@ -70,7 +62,11 @@ class Location:
 
 class VkPay:
 
-    def __new__(cls, pay_hash: Optional[str], payload: Optional[str]=None):
+    def __new__(
+        cls,
+        pay_hash: str,
+        payload: Optional[str] | None=None
+    ) -> Dict[str, Union[str, Dict[str, str], None]]:
         return {
             "action": {
                 "type": "vkpay",
@@ -82,7 +78,14 @@ class VkPay:
 
 class VkApps:
 
-    def __new__(cls, app_id: Optional[int], owner_id: Optional[int], label: Optional[str], app_hash: Optional[str], payload: Optional[str]=None):
+    def __new__(
+        cls,
+        app_id: int,
+        owner_id: int,
+        label: str,
+        app_hash: str,
+        payload: Optional[str] | None=None
+    ) -> Dict[str, Union[str, Dict[str, Any], None]]:
         return {
             "action": {
                 "type": "vkapps",
@@ -93,3 +96,38 @@ class VkApps:
                 "payload": payload
             }
         }
+    
+
+class Keyboard:
+
+    def __init__(
+        self,
+        button: List[
+            Union[
+                Text,
+                OpenLink,
+                Location,
+                VkPay,
+                VkApps
+            ]
+        ],
+        *,
+        one_time: bool=False,
+        inline: bool=False
+    ) -> None:
+        self.one_time = one_time
+        self.inline = inline
+
+        self.keyboard: Dict[str, Union[bool, List[Union[Text, OpenLink, Location, VkPay, VkApps]]]] = {
+            "one_time": self.one_time,
+            "inline": self.inline,
+            "buttons": button
+        }
+
+    def add_keyboard(self) -> str:
+        obj = json.dumps(self.keyboard, ensure_ascii=False).encode("utf-8")
+        return obj.decode("utf-8")
+
+    def get_empty_keyboard(self) -> str:
+        self.keyboard["buttons"] = []
+        return self.add_keyboard()
