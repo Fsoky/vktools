@@ -9,6 +9,9 @@ class ButtonColor(Enum):
     PRIMARY: str = "primary"
     SECONDARY: str = "secondary"
 
+    def default(self):
+        return self.value
+
 
 class Text:
 
@@ -17,14 +20,14 @@ class Text:
         label: str,
         color: ButtonColor=ButtonColor.SECONDARY,
         payload: Optional[str] | None=None
-    ) -> Dict[str, Union[str, Dict[str, str], None]]:
+    ) -> Optional[Dict[str, Union[str, Dict[str, str], None]]]:
         return {
             "action": {
                 "type": "text",
                 "label": label,
                 "payload": payload
             },
-            "color": color
+            "color": color.value
         }
 
 
@@ -35,7 +38,7 @@ class OpenLink:
         label: Optional[str],
         link: Optional[str],
         payload: Optional[str] | None=None
-    ) -> Dict[str, Union[str, Dict[str, str], None]]:
+    ) -> Optional[Dict[str, Union[str, Dict[str, str], None]]]:
         return {
             "action": {
                 "type": "open_link",
@@ -51,7 +54,7 @@ class Location:
     def __new__(
         cls,
         payload: Optional[str] | None=None
-    ) -> Dict[str, Union[str, Dict[str, str], None]]:
+    ) -> Optional[Dict[str, Union[str, Dict[str, str], None]]]:
         return {
             "action": {
                 "type": "location",
@@ -66,7 +69,7 @@ class VkPay:
         cls,
         pay_hash: str,
         payload: Optional[str] | None=None
-    ) -> Dict[str, Union[str, Dict[str, str], None]]:
+    ) -> Optional[Dict[str, Union[str, Dict[str, str], None]]]:
         return {
             "action": {
                 "type": "vkpay",
@@ -85,7 +88,7 @@ class VkApps:
         label: str,
         app_hash: str,
         payload: Optional[str] | None=None
-    ) -> Dict[str, Union[str, Dict[str, Any], None]]:
+    ) -> Optional[Dict[str, Union[str, Dict[str, Any], None]]]:
         return {
             "action": {
                 "type": "vkapps",
