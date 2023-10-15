@@ -24,7 +24,7 @@ class Element:
             ]
         ] | None=None,
         template_type: str="open_link"
-    ) -> Union[dict, None]:
+    ) -> Union[Optional[Dict[str, Any]], None]:
         element: Dict[str, Any] = {
             "title": title,
             "description": description,
@@ -43,20 +43,20 @@ class Element:
             }
         else:
             raise ValueError("Parameter template_type have: open_link or open_photo")
+        return element
         
 
 class Carousel:
 
-    def __init__(self, carousel: List[Element]) -> None:
-        self.carousel = carousel
+    def __init__(self, elements: List[Element]) -> None:
+        self.elements = elements
 
     def add_carousel(self) -> str:
         obj = json.dumps(
             {
                 "type": "carousel",
-                "elements": self.carousel
+                "elements": self.elements
             },
             ensure_ascii=False
         ).encode("utf-8")
-
         return obj.decode("utf-8")
