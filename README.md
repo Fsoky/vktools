@@ -1,7 +1,7 @@
 # VkTools - дополнительные инструменты для vk-api
 
 ### Инструменты 🛠
-![Python](https://img.shields.io/badge/Python-3.8-blue?style=for-the-badge&logo=python)
+![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python)
 ![Json](https://img.shields.io/badge/json-red?style=for-the-badge&logo=json)
 ![typing](https://img.shields.io/badge/typing-orange?style=for-the-badge)
 
