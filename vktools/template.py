@@ -1,31 +1,23 @@
 import json
-from typing import List, Dict, Any, Union, Optional
+from typing import Any
 
-from .keyboard import Text, OpenLink, Location, VkPay, VkApps
+from .keyboard import Text, OpenLink, Location, VkPay, VkApps, OpenApp, Callback
 
 
 class Element:
 
     def __new__(
         cls,
-        title: Optional[str] | None=None,
-        description: Optional[str] | None=None,
-        photo_id: Optional[str] | None=None,
-        link: Optional[str] | None=None,
-        buttons: Optional[
-            List[
-                Union[
-                    Text,
-                    OpenLink,
-                    Location,
-                    VkPay,
-                    VkApps
-                ]
-            ]
+        title: str | None=None,
+        description: str | None=None,
+        photo_id: str | None=None,
+        link: str | None=None,
+        buttons: list[
+            Text | OpenLink | Location | VkPay | VkApps | OpenApp | Callback
         ] | None=None,
         template_type: str="open_link"
-    ) -> Union[Optional[Dict[str, Any]], None]:
-        element: Dict[str, Any] = {
+    ) -> dict[str, Any] | None:
+        element = {
             "title": title,
             "description": description,
             "photo_id": photo_id,
@@ -48,7 +40,7 @@ class Element:
 
 class Carousel:
 
-    def __init__(self, elements: List[Element]) -> None:
+    def __init__(self, elements: list[Element]) -> None:
         self.elements = elements
 
     def add_carousel(self) -> str:
